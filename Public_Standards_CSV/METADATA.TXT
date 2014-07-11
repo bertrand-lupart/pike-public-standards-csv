@@ -1,0 +1,3 @@
+MODULE=Public.Standards.CSV
+VERSION=0.1
+PLATFORM=any/any
