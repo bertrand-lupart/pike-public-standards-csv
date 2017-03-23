@@ -26,16 +26,16 @@ string __version = "0.2";
 string __author = "Bertrand LUPART <bertrand@caudium.net>";
 array __components = ({ "Public.pmod/Standards.pmod/CSV.pmod/module.pmod" });
 
-static int default_type_detection = 0;
+protected int default_type_detection = 0;
 
 
 // TODO: PCRE instead of SimpleRegexp? PCRE is faster but optional...
 
-static object _enquote = Regexp("(,|\"|\n|\r)"); // Matches a string to be quoted
+protected object _enquote = Regexp("(,|\"|\n|\r)"); // Matches a string to be quoted
 
-static object _int = Regexp("^[0-9]+$"); // Matches an int
-static object _float = Regexp("^[0-9]+\\\.[0-9]*$"); // Matches a float
-static object _string = Regexp("^\"*.+\"*$"); // Matches a string
+protected object _int = Regexp("^[0-9]+$"); // Matches an int
+protected object _float = Regexp("^[0-9]+\\\.[0-9]*$"); // Matches a float
+protected object _string = Regexp("^\"*.+\"*$"); // Matches a string
 
 
 
@@ -133,10 +133,10 @@ mixed detect_type(mixed v)
 // any source.
 class CSVIterator
 {
-	static int csv_index=-1; // current CSV index
-	static array csv_line = ({ }); // current CSV data
+	protected int csv_index=-1; // current CSV index
+	protected array csv_line = ({ }); // current CSV data
 
-	static int data_remaining = 1; // Is there still some data to read from the Iterator?
+	protected int data_remaining = 1; // Is there still some data to read from the Iterator?
 
 	// line_iterator reads data a line at a time
 	object line_iterator;
@@ -233,7 +233,7 @@ class CSVIterator
 	//!
 	//! @param in
 	//!  The line from the file we want to parse, as a string
-	static void parse_csv(string in)
+	protected void parse_csv(string in)
 	{
 		// We can't just divide the string on comma, since commas can be quoted
 		int quoted = 0; // are we inside a quote sequence?
@@ -290,8 +290,8 @@ class CSVIterator
 
 class String
 {
-	static int _standards=1;
-	static int do_type_detection=default_type_detection;
+	protected int _standards=1;
+	protected int do_type_detection=default_type_detection;
 
   // csv_iterator reads a CSV line at a time
   // a CSV line can be splitted into multiple file lines
@@ -372,12 +372,12 @@ class String
 		return res;
 	}
 
-	static object _get_iterator()
+	protected object _get_iterator()
 	{
 		return csv_iterator;
 	}
 
-	static string _sprintf(mixed... args)
+	protected string _sprintf(mixed... args)
 	{
 		return "Public.Standards.CSV.String";
 	}
@@ -391,8 +391,8 @@ class FILE
 {
 	inherit Stdio.FILE;
 
-	static int _standards=1; // Do we want to be standards compliant for output?
-	static int do_type_detection=default_type_detection;
+	protected int _standards=1; // Do we want to be standards compliant for output?
+	protected int do_type_detection=default_type_detection;
 
 	// csv_iterator reads a CSV line at a time
 	// a CSV line can be splitted into multiple file lines
@@ -509,12 +509,12 @@ class FILE
 		return res;
 	}
 
-	static object _get_iterator()
+	protected object _get_iterator()
 	{
 		return  CSVIterator(this_object()->line_iterator(1));
 	}
 
-	static string _sprintf(mixed... args)
+	protected string _sprintf(mixed... args)
 	{
 		return replace(::_sprintf(@args), "Stdio.FILE", "Public.Standards.CSV.FILE");
 	}
