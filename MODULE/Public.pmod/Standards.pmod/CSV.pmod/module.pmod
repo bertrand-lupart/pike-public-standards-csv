@@ -121,8 +121,6 @@ mixed detect_type(mixed v)
 }
 
 
-// TODO: default dummy CSV object inherited by others
-
 
 /* Public.Standards.CSV.CSVIterator */
 
@@ -130,7 +128,7 @@ mixed detect_type(mixed v)
 // convert to CSV data on the fly.
 // Since that's a generic line Iterator, this can be used for parsing data from
 // any source.
-class CSVIterator
+protected class CSVIterator
 {
 	protected int csv_index=-1; // current CSV index
 	protected array csv_line = ({ }); // current CSV data
@@ -285,9 +283,9 @@ class CSVIterator
 }
 
 
-/* Public.Standards.CSV.String */
+/* Public.Standards.CSV.CSVDumb */
 
-class CSVDumb
+protected class CSVDumb
 {
  	protected int _standards=1;
 	protected int do_type_detection=default_type_detection;
