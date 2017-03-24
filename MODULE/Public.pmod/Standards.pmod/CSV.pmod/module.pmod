@@ -22,7 +22,7 @@
  * ***** END LICENSE BLOCK ***** */
 
 
-string __version = "0.2";
+string __version = "0.3";
 string __author = "Bertrand LUPART <bertrand@caudium.net>";
 array __components = ({ "Public.pmod/Standards.pmod/CSV.pmod/module.pmod" });
 
@@ -30,7 +30,6 @@ protected int default_type_detection = 0;
 
 
 // TODO: PCRE instead of SimpleRegexp? PCRE is faster but optional...
-
 protected object _enquote = Regexp("(,|\"|\n|\r)"); // Matches a string to be quoted
 
 protected object _int = Regexp("^[0-9]+$"); // Matches an int
@@ -288,20 +287,14 @@ class CSVIterator
 
 /* Public.Standards.CSV.String */
 
-class String
+class CSVDumb
 {
-	protected int _standards=1;
+ 	protected int _standards=1;
 	protected int do_type_detection=default_type_detection;
 
   // csv_iterator reads a CSV line at a time
   // a CSV line can be splitted into multiple file lines
 	object csv_iterator;
-
-	void create(string data)
-	{
-		// Simulate a line iterator
-		csv_iterator = CSVIterator(global.String.SplitIterator(data, ({ 10,13 })));
-	}
 
   //! If standards compliant, not all the fields will be enclosed in double
   //! quotes, only thoses containing double quotes, commas and newlines
@@ -371,13 +364,28 @@ class String
 
 		return res;
 	}
+   
+}
+
+
+/* Public.Standards.CSV.String */
+
+class String
+{
+  inherit CSVDumb;
+
+	void create(string data)
+	{
+		csv_iterator =
+      CSVIterator(global.String.SplitIterator(data||"", ({ 10,13 })));
+	}
 
 	protected object _get_iterator()
 	{
 		return csv_iterator;
 	}
 
-	protected string _sprintf(mixed... args)
+	protected string _sprintf(mixed ... args)
 	{
 		return "Public.Standards.CSV.String";
 	}
@@ -389,60 +397,15 @@ class String
 
 class FILE
 {
-	inherit Stdio.FILE;
+  inherit CSVDumb;
+	inherit Stdio.FILE : file;
 
-	protected int _standards=1; // Do we want to be standards compliant for output?
-	protected int do_type_detection=default_type_detection;
+  void create(mixed ... args)
+  {
+    file::create(@args);
 
-	// csv_iterator reads a CSV line at a time
-	// a CSV line can be splitted into multiple file lines
-	object csv_iterator;
-
-	//! If standards compliant, not all the fields will be enclosed in double
-	//! quotes, only thoses containing double quotes, commas and newlines
-	//!
-	//! @param t
-	//!  1 sets the file to be standards compliant
-	//!  0 unsets it
-	void set_standard_compliance(int t)
-	{
-	  _standards = t;
-	}
-
-
-	//! If standards compliant, not all the fields will be enclosed in double
-	//! quotes, only thoses containing double quotes, commas and newlines
-	//!
-	//! @returns
-	//! 1 or 0 wether the file has been set standards compliant or not
-	int get_standard_compliance()
-	{
-		return _standards;
-	}
-
-
-	//! Enable or disable the type detection.
-	//!
-	//! @param t
-	//!  1 sets the file to detect types
-	//!  0 unsets it
-	//!
-	//! @returns
-	//! 1 or 0 wether the file has been set do detect types or not
-	void set_type_detection(int t)
-	{
-		do_type_detection = t;
-	}
-
-
-	//! Check if type detection is enabled or not.
-	//!
-	//! @returns
-	//!  1 or 0 wether the file has been set to detect types or not
-	int get_type_detection()
-	{
-		return do_type_detection;
-	}
+    csv_iterator = CSVIterator(this_object()->line_iterator(1));
+  }
 
 	//! Write a row
 	//!
@@ -475,43 +438,9 @@ class FILE
 	  return ::write((result * ",") + "\n");
 	}
 
-
-
-	//! Read a row
-	//!
-	//! @returns
-	//! The row splitted into an array
-	//! 0 if no data
-	int|array read_row()
-	{
-		// We have to instanciate the CSVIterator the first time
-		// TODO: shouldn't it be in create()?
-		if(!objectp(csv_iterator))
-		{
-			csv_iterator = CSVIterator(this_object()->line_iterator(1));
-		}
-
-		mixed res = csv_iterator->value();
-
-		// Type detection has not made it into CSVIterator, because it was hell
-		// to set/unset type detection on the fly this way
-		if(do_type_detection && res)
-		{
-			foreach(res; mixed indice; mixed value)
-			{
-				res[indice] = detect_type(value);
-			}
-		}
-
-		// Move the iterators to the next line
-		csv_iterator->next();
-
-		return res;
-	}
-
 	protected object _get_iterator()
 	{
-		return  CSVIterator(this_object()->line_iterator(1));
+    return csv_iterator;
 	}
 
 	protected string _sprintf(mixed... args)
