@@ -1,0 +1,18 @@
+name: Test module
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'MODULE/**'
+jobs:
+  Test:
+    runs-on: ubuntu-latest
+    container:
+      image: pikelang/pike:stable-latest
+    steps:
+      - name: Check module compilation
+        run: |
+          cd ${{ github.workspace }}
+          pike -M MODULE -e "indices(Public.Standards.CSV)"
