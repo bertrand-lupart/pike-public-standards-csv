@@ -28,4 +28,5 @@ jobs:
         uses: actions/checkout@v3
       - name: Check module compilation on ${{ matrix.pike-version }}
         run: |
-          pike -e "indices(Public.Standards.CSV)"
+          cd ${{ github.workspace }}
+          pike -x test_pike testsuite
