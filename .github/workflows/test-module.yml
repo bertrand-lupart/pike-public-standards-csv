@@ -22,7 +22,7 @@ jobs:
         run: |
           id
           ls -al /
-          ls -alR /github/workspace
+          ls -alR /github/
           ls -alR /home/runner/work/
           ls -al ${{ github.workspace }}
           cd ${{ github.workspace }}
