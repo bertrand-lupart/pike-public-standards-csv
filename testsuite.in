@@ -1,0 +1,8 @@
+START_MARKER
+
+test_compile([[Public.Standards.CSV.String foo=Public.Standards.CSV.String("")]])
+test_compile([[Public.Standards.CSV.String foo=Public.Standards.CSV.String(",")]])
+test_compile([[Public.Standards.CSV.String foo=Public.Standards.CSV.String("foo,bar")]])
+test_compile([[Public.Standards.CSV.String foo=Public.Standards.CSV.String("foo,bar,")]])
+
+END_MARKER
