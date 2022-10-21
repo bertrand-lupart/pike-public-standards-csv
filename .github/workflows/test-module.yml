@@ -26,7 +26,7 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-      - name: Check module compilation on ${{ matrix.pike-version }}
+      - name: Run tests against ${{ matrix.pike-version }}
         run: |
           cd ${{ github.workspace }}
           pike -x test_pike testsuite
