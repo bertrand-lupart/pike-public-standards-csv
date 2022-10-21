@@ -13,8 +13,8 @@ jobs:
       matrix:
         pike-version: ["7.8-latest", "8.0-latest"]
 
-    container:
-      image: pikelang/pike:${{ matrix.pike-version }}
+#    container:
+#      image: pikelang/pike:${{ matrix.pike-version }}
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
