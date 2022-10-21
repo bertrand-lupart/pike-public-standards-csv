@@ -14,11 +14,11 @@ jobs:
         pike-version: ["7.8-latest", "8.0-latest"]
 
     container:
-      image: pikelang/pike:${{pike-version}}
+      image: pikelang/pike:${{ matrix.pike-version }}
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-      - name: Check module compilation on ${{pike-version}}
+      - name: Check module compilation on ${{ matrix.pike-version }}
         run: |
           cd ${{ github.workspace }}
           pike -M MODULE -e "indices(Public.Standards.CSV)"
