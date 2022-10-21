@@ -21,6 +21,7 @@ jobs:
       - name: Check module compilation on ${{ matrix.pike-version }}
         run: |
           id
+          ls -alR /home/runner/work/
           ls -al ${{ github.workspace }}
           cd ${{ github.workspace }}
           pike -M MODULE -e "indices(Public.Standards.CSV)"
