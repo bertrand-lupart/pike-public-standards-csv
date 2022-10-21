@@ -1,8 +1,5 @@
 name: Pike Module (pmod)
 
-env:
-  workspace: /github/workspace
-
 on:
   workflow_dispatch:
   push:
@@ -22,9 +19,9 @@ jobs:
     container:
       image: pikelang/pike:${{ matrix.pike-version }}
       volumes:
-        - ${{ github.workspace }}:${{ env.workspace }}
+        - ${{ github.workspace }}:${{ github.workspace }}
       env:
-        PIKE_MODULE_PATH: ${{ env.workspace }}/MODULE
+        PIKE_MODULE_PATH: ${{ github.workspace }}/MODULE
 
     steps:
       - name: Check out repository code
