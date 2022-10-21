@@ -16,7 +16,7 @@ jobs:
     container:
       image: pikelang/pike:${{ matrix.pike-version }}
       volumes:
-        - ${{ github.workspace }}
+        - ${{ github.workspace }}:"/github/workspace"
 
     steps:
       - name: Check out repository code
