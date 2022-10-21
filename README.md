@@ -1,3 +1,5 @@
+[![Pike Module (pmod)](https://github.com/bertrand-lupart/pike-public-standards-csv/actions/workflows/test-module.yml/badge.svg)](https://github.com/bertrand-lupart/pike-public-standards-csv/actions/workflows/test-module.yml)
+
 pike-public-standards-csv
 =========================
 
