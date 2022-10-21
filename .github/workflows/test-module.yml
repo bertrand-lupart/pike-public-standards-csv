@@ -1,4 +1,4 @@
-name: Test module
+name: Pike Module (pmod)
 on:
   workflow_dispatch:
   push:
@@ -9,10 +9,16 @@ on:
 jobs:
   Test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        pike-version: ["7.8-latest", "8.0-latest"]
+
     container:
-      image: pikelang/pike:stable-latest
+      image: pikelang/pike:${{pike-version}}
     steps:
-      - name: Check module compilation
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Check module compilation on ${{pike-version}}
         run: |
           cd ${{ github.workspace }}
           pike -M MODULE -e "indices(Public.Standards.CSV)"
