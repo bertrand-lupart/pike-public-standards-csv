@@ -17,10 +17,12 @@ jobs:
       image: pikelang/pike:${{ matrix.pike-version }}
       volumes:
         - ${{ github.workspace }}:/github/workspace
+      env:
+        PIKE_MODULE_PATH: /github/workspace/MODULE
 
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
       - name: Check module compilation on ${{ matrix.pike-version }}
         run: |
-          pike -M /github/workspace/MODULE -e "indices(Public.Standards.CSV)"
+          pike -e "indices(Public.Standards.CSV)"
