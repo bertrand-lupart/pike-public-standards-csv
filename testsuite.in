@@ -1,12 +1,14 @@
 START_MARKER
 
-test_compile([[Public.Standards.CSV.String foo=Public.Standards.CSV.String("")]])
+test_compile([[ Public.Standards.CSV.String foo=Public.Standards.CSV.String("") ]])
 test_any_equal([[ Public.Standards.CSV.String("")]], ({ "" }))
-test_compile([[Public.Standards.CSV.String foo=Public.Standards.CSV.String(",")]])
+test_compile([[ Public.Standards.CSV.String foo=Public.Standards.CSV.String(",") ]])
 test_any_equal([[ Public.Standards.CSV.String(",")]], ({ "","" }))
-test_compile([[Public.Standards.CSV.String foo=Public.Standards.CSV.String("foo,bar")]])
+test_compile([[ Public.Standards.CSV.String foo=Public.Standards.CSV.String("foo,bar") ]])
 test_any_equal([[ Public.Standards.CSV.String("foo,bar")]], ({ "foo","bar" }))
-test_compile([[Public.Standards.CSV.String foo=Public.Standards.CSV.String("foo,bar,")]])
+test_compile([[ Public.Standards.CSV.String foo=Public.Standards.CSV.String("foo,bar,") ]])
 test_any_equal([[ Public.Standards.CSV.String("foo,bar,")]], ({ "foo","bar","" }))
+
+test_compile([[ Public.Standards.CSV.FILE foo=Public.Standards.CSV.FILE("data/simple.csv") ]])
 
 END_MARKER
