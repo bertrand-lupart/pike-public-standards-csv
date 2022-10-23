@@ -31,6 +31,9 @@ testsuite.in:12: test 9, expected result: COMPILE
 void x() {  Public.Standards.CSV.FILE foo=Public.Standards.CSV.FILE("data/simple.csv")  ; } 
 ....
 testsuite.in:13: test 10, expected result: COMPILE
+void x() {  Public.Standards.CSV.FILE foo=Public.Standards.CSV.FILE("data/simple_dos.csv")  ; } 
+....
+testsuite.in:14: test 11, expected result: COMPILE
 void x() {  Public.Standards.CSV.FILE foo=Public.Standards.CSV.FILE("data/sample.csv")  ; } 
 ....
 END
