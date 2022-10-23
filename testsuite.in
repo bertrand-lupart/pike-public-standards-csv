@@ -10,5 +10,6 @@ test_compile([[ Public.Standards.CSV.String foo=Public.Standards.CSV.String("foo
 test_any_equal([[ Public.Standards.CSV.String("foo,bar,")]], ({ "foo","bar","" }))
 
 test_compile([[ Public.Standards.CSV.FILE foo=Public.Standards.CSV.FILE("data/simple.csv") ]])
+test_compile([[ Public.Standards.CSV.FILE foo=Public.Standards.CSV.FILE("data/sample.csv") ]])
 
 END_MARKER
