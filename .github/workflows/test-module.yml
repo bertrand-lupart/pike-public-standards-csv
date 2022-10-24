@@ -39,8 +39,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Install Pike
         uses: ConorMacBride/install-package@v1
-          with:
-            apt: pike8.0 pike8.0-core pike8.0-image pike8.0-gdbm pike8.0-pcre pike8.0-mysql pike8.0-pg pike8.0-dev
+        with:
+          apt: pike8.0 pike8.0-core pike8.0-image pike8.0-gdbm pike8.0-pcre pike8.0-mysql pike8.0-pg pike8.0-dev
       - name: Run tests
         run: |
           cd ${{ github.workspace }}
