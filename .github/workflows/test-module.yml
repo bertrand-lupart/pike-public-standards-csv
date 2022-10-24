@@ -47,7 +47,7 @@ jobs:
           pike -x test_pike testsuite
 
   Testsuite-macOS:
-    run-on: macos-latest
+    runs-on: macos-latest
     env:
       PIKE_MODULE_PATH: ${{ github.workspace }}/MODULE
     steps:
