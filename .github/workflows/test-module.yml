@@ -47,7 +47,10 @@ jobs:
           pike -x test_pike testsuite
 
   Testsuite-macOS:
-    runs-on: macos-latest
+    strategy:
+      matrix:
+        macos-version: ["macos-11","macos-12"]
+    runs-on: ${{ matrix.macos-version }}
     env:
       PIKE_MODULE_PATH: ${{ github.workspace }}/MODULE
     steps:
