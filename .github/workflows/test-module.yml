@@ -9,11 +9,11 @@ on:
 
 jobs:
 
-  Test:
+  Testsuite-OCI:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        pike-version: ["7.8-latest", "8.0-latest"]
+        pike-version: ["7.8-latest", "8.0-latest", "8.0-latest-slim"]
 
     container:
       image: pikelang/pike:${{ matrix.pike-version }}
