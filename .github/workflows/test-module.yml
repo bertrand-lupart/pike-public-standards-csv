@@ -46,3 +46,18 @@ jobs:
           cd ${{ github.workspace }}
           pike -x test_pike testsuite
 
+  Testsuite-macOS:
+    run-on: macos-latest
+    env:
+      PIKE_MODULE_PATH: ${{ github.workspace }}/MODULE
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Install Pike
+        uses: ConorMacBride/install-package@v1
+          with:
+            brew: pike
+      - name: Run tests
+        run: |
+          cd ${{ github.workspace }}
+          pike -x test_pike testsuite
