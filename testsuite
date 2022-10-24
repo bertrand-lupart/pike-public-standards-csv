@@ -3,28 +3,28 @@ testsuite.in:3: test 1, expected result: COMPILE
 void x() {  Public.Standards.CSV.String foo=Public.Standards.CSV.String("")  ; } 
 ....
 testsuite.in:4: test 2, expected result: EQUAL
-mixed a() {  Public.Standards.CSV.String("")->read_row() ; }
+mixed a() {  array foo = Public.Standards.CSV.String("")->read_row() ; }
 mixed b() { return ({ "" }); }
 ....
 testsuite.in:5: test 3, expected result: COMPILE
 void x() {  Public.Standards.CSV.String foo=Public.Standards.CSV.String(",")  ; } 
 ....
 testsuite.in:6: test 4, expected result: EQUAL
-mixed a() {  Public.Standards.CSV.String(",")->read_row() ; }
+mixed a() {  array foo = Public.Standards.CSV.String(",")->read_row() ; }
 mixed b() { return ({ "","" }); }
 ....
 testsuite.in:7: test 5, expected result: COMPILE
 void x() {  Public.Standards.CSV.String foo=Public.Standards.CSV.String("foo,bar")  ; } 
 ....
 testsuite.in:8: test 6, expected result: EQUAL
-mixed a() {  Public.Standards.CSV.String("foo,bar")->read_row() ; }
+mixed a() {  array foo = Public.Standards.CSV.String("foo,bar")->read_row() ; }
 mixed b() { return ({ "foo","bar" }); }
 ....
 testsuite.in:9: test 7, expected result: COMPILE
 void x() {  Public.Standards.CSV.String foo=Public.Standards.CSV.String("foo,bar,")  ; } 
 ....
 testsuite.in:10: test 8, expected result: EQUAL
-mixed a() {  Public.Standards.CSV.String("foo,bar,")->read_row() ; }
+mixed a() {  array foo = Public.Standards.CSV.String("foo,bar,")->read_row() ; }
 mixed b() { return ({ "foo","bar","" }); }
 ....
 testsuite.in:12: test 9, expected result: COMPILE
