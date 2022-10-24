@@ -5,9 +5,7 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'MODULE/**'
-      - 'testsuite'
+    paths: ["MODULE/**", "testsuite"]
 
 jobs:
 
