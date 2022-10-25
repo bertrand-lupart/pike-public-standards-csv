@@ -30,8 +30,11 @@ jobs:
           cd ${{ github.workspace }}
           pike -x test_pike testsuite
 
-  Testsuite-Ubuntu:
-    runs-on: ubuntu-latest
+  Testsuite-runner-unix:
+    strategy:
+      matrix:
+        os: ["ubuntu-latest","macos-11","macos-12"]
+    runs-on: ${{ matrix.os }}
     env:
       PIKE_MODULE_PATH: ${{ github.workspace }}/MODULE
     steps:
@@ -41,24 +44,6 @@ jobs:
         uses: ConorMacBride/install-package@v1.1.0
         with:
           apt: pike8.0 pike8.0-core pike8.0-image pike8.0-gdbm pike8.0-pcre pike8.0-mysql pike8.0-pg pike8.0-dev
-      - name: Run tests
-        run: |
-          cd ${{ github.workspace }}
-          pike -x test_pike testsuite
-
-  Testsuite-macOS:
-    strategy:
-      matrix:
-        macos-version: ["macos-11","macos-12"]
-    runs-on: ${{ matrix.macos-version }}
-    env:
-      PIKE_MODULE_PATH: ${{ github.workspace }}/MODULE
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v3
-      - name: Install Pike
-        uses: ConorMacBride/install-package@v1.1.0
-        with:
           brew: pike
       - name: Run tests
         run: |
