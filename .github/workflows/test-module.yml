@@ -55,5 +55,7 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-      - name: Install Pike
-          # http://pike.lysator.liu.se/pub/pike/latest-stable/Pike-v8.0.1738-Windows7-x86.msi
+      - name: Download Pike
+        shell: pwsh
+        run: |
+          Invoke-WebRequest -URI http://pike.lysator.liu.se/pub/pike/latest-stable/Pike-v8.0.1738-Windows7-x86.msi -OutFile pike.msi
