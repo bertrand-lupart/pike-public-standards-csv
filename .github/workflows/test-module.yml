@@ -52,6 +52,8 @@ jobs:
 
   Testsuite-windows:
     runs-on: windows-latest
+    env:
+      PIKE_MODULE_PATH: ${{ github.workspace }}/MODULE
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
@@ -63,3 +65,8 @@ jobs:
         shell: pwsh
         run: |
           msiexec.exe /i pike.msi /qn
+      - name: Run tests
+        shell: pwsh
+        run: |
+          cd ${{ github.workspace }}
+          pike -x test_pike testsuite
