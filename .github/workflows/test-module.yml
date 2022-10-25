@@ -69,4 +69,4 @@ jobs:
         shell: pwsh
         run: |
           cd ${{ github.workspace }}
-          pike -x test_pike testsuite
+          pike.exe /x test_pike testsuite
