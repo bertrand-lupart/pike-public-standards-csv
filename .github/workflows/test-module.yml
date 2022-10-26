@@ -64,9 +64,10 @@ jobs:
       - name: Install Pike
         shell: pwsh
         run: |
-          msiexec.exe /i pike.msi /qn
-      - name: Run tests
-        shell: pwsh
-        run: |
-          cd ${{ github.workspace }}
-          pike.exe /x test_pike testsuite
+          msiexec.exe /i pike.msi /qn /L*V "D:\a\pike-public-standards-csv\package.log"
+          type "D:\a\pike-public-standards-csv\package.log"
+      # - name: Run tests
+      #   shell: pwsh
+      #   run: |
+      #     cd ${{ github.workspace }}
+      #     pike.exe /x test_pike testsuite
