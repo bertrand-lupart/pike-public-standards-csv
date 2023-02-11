@@ -65,7 +65,7 @@ jobs:
         shell: pwsh
         run: |
           msiexec.exe /i pike.msi /qn /L*V "D:\a\pike-public-standards-csv\package.log"
-          DIR "D:\a\" /s
+          Get-ChildItem -Path "D:\a\pike-public-standards-csv\" -Recurse
           type "D:\a\pike-public-standards-csv\package.log"
       # - name: Run tests
       #   shell: pwsh
