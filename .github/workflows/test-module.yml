@@ -24,7 +24,7 @@ jobs:
 
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Run tests against ${{ matrix.pike-version }}
         run: |
           cd ${{ github.workspace }}
@@ -39,7 +39,7 @@ jobs:
       PIKE_MODULE_PATH: ${{ github.workspace }}/MODULE
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install Pike
         uses: ConorMacBride/install-package@v1.1.0
         with:
@@ -56,7 +56,7 @@ jobs:
       PIKE_MODULE_PATH: ${{ github.workspace }}/MODULE
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Download Pike
         shell: pwsh
         run: |
